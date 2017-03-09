@@ -12,8 +12,17 @@
 
 // 1. Be able to detect what data type each node is
 
+var classifyObject = function(input) {
+  if (Array.isArray(input)) {
+    return 'array';
+  }
+  if (input === null) {
+    return 'null';
+  }
+  return 'object';
+};
+
 var classifyType = function(input) {
-  // detect if input is primitive or object
   // if input is object, detect the object and return type
   if (typeof input === 'object') {
     return classifyObject(input);
@@ -22,24 +31,8 @@ var classifyType = function(input) {
   return typeof input;
 };
 
-var classifyObject = function(input) {
-  // detect which type of object
-  // return object type
-};
-
 // ORIGINAL FUNCTION
 
 var stringifyJSON = function(obj) {
-  // determine what type of item it is
-  // will process
-    // number
-    // string
-    // boolean
-    // null (use obj === null)
-    // use Array.isArray or Object.prototype.toString.call
-      // array
-      // object
-  // will not process
-    // function
-    // undefined
+
 };
