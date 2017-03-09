@@ -31,6 +31,14 @@ var classifyType = function(input) {
   return typeof input;
 };
 
+// 2. Based on data type, format/decorate string version
+
+var rejectTypes = ['function', 'undefined'];
+var plainTypes = ['boolean', 'number', 'null'];
+var quoteTypes = ['string'];
+var bracketTypes = ['array'];
+var curlyBraceTypes = ['object'];
+
 // ORIGINAL FUNCTION
 
 var stringifyJSON = function(obj) {
