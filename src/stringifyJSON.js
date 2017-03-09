@@ -12,11 +12,11 @@
 
 // 1. Be able to detect what data type each node is
 
-var classifyObject = function(input) {
-  if (Array.isArray(input)) {
+var classifyObject = function(obj) {
+  if (Array.isArray(obj)) {
     return 'array';
   }
-  if (input === null) {
+  if (obj === null) {
     return 'null';
   }
   return 'object';
@@ -39,8 +39,27 @@ var quoteTypes = ['string'];
 var bracketTypes = ['array'];
 var curlyBraceTypes = ['object'];
 
+var decorator = function(type, input) {
+  if (plainTypes.includes(type)) {
+    return `${input}`;
+  }
+  if (quoteTypes.includes(type)) {
+    return `"${input}"`;
+  }
+  if (bracketTypes.includes(type)) {
+    return `[${input}]`;
+  }
+  if (curlyBraceTypes.includes(type)) {
+    return `{${input}}`;
+  }
+};
+
 // ORIGINAL FUNCTION
 
 var stringifyJSON = function(obj) {
-
+  var type = classifyType(obj);
+  if (rejectTypes.includes(type)) {
+    return;
+  }
+  return decorator(type, obj);
 };
