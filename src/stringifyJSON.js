@@ -14,8 +14,12 @@
 
 var classifyType = function(input) {
   // detect if input is primitive or object
-  // if input is primitive, return type
   // if input is object, detect the object and return type
+  if (typeof input === 'object') {
+    return classifyObject(input);
+  }
+  // if input is primitive, return type
+  return typeof input;
 };
 
 var classifyObject = function(input) {
