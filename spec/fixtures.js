@@ -1,3 +1,45 @@
+// custom fixtures
+var primitives = [
+  9,
+  null,
+  true,
+  false,
+  'Hello world'
+];
+
+var flatArrays = [
+  [],
+  [8],
+  ['hi'],
+  [8, 'hi'],
+  [1, 0, -1, -0.3, 0.3, 1343.32, 3345, 0.00011999999999999999]
+];
+
+var flatObjects = [
+  {},
+  {'a': 'apple'},
+  {'foo': true, 'bar': false, 'baz': null},
+  {'boolean, true': true, 'boolean, false': false, 'null': null }
+];
+
+var arraysWithinArrays = [
+  [8, [[], 3, 4]],
+  [[[['foo']]]]
+];
+
+var objectsWithinObjects = [
+  {'a': {'b': 'c'}}
+];
+
+var arraysWithinObjects = [
+  {'a': ['b', 'c']},
+  {'a': [], 'c': {}, 'b': true}
+];
+
+var objectsWithinArrays = [
+  [{'a': 'b'}, {'c': 'd'}]
+];
+
 var validStrings, invalidStrings, // used for stringifyJSON and parseJSON specs
   weirdObjects; // used for stringifyJSON spec
 
