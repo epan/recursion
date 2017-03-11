@@ -5,9 +5,11 @@
 
 // High-level plan
 // 1. Be able to detect what data type each node is
-// 2. Based on data type, format/decorate string version
-// 3. Traverse (across and into) entire JSON input
-// 4. Build up string as traversing and then return it
+// 2. Based on data type, format/decorate primitive string version
+// 3. Format/decorate array
+// 4. Format/decorate object
+// 5. Traverse (across and into) entire JSON input
+// 6. Build up string as traversing and then return it
 
 
 // 1. Be able to detect what data type each node is
@@ -31,8 +33,9 @@ var classifyType = function(input) {
   return typeof input;
 };
 
-// 2. Based on data type, format/decorate string version
+// 2. Based on data type, format/decorate primitive string version
 
+// Definitions of types for purposes of string decoration
 var rejectTypes = ['function', 'undefined'];
 var plainTypes = ['boolean', 'number', 'null'];
 var quoteTypes = ['string'];
@@ -40,7 +43,7 @@ var bracketTypes = ['array'];
 var curlyBraceTypes = ['object'];
 var objects = ['array', 'object'];
 
-var decoratePrimitive = function(type, input) {
+var decoratePrimitives = function(type, input) {
   if (plainTypes.includes(type)) {
     return `${input}`;
   }
@@ -49,6 +52,10 @@ var decoratePrimitive = function(type, input) {
   }
 };
 
+// 3. Format/decorate array
+
+
+
 // ORIGINAL FUNCTION
 
 var stringifyJSON = function(obj) {
@@ -56,5 +63,5 @@ var stringifyJSON = function(obj) {
   if (rejectTypes.includes(type)) {
     return;
   }
-  return decoratePrimitive(type, obj);
+  return decoratePrimitives(type, obj);
 };
