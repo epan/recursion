@@ -38,19 +38,14 @@ var plainTypes = ['boolean', 'number', 'null'];
 var quoteTypes = ['string'];
 var bracketTypes = ['array'];
 var curlyBraceTypes = ['object'];
+var objects = ['array', 'object'];
 
-var decorator = function(type, input) {
+var decoratePrimitive = function(type, input) {
   if (plainTypes.includes(type)) {
     return `${input}`;
   }
   if (quoteTypes.includes(type)) {
     return `"${input}"`;
-  }
-  if (bracketTypes.includes(type)) {
-    return `[${input}]`;
-  }
-  if (curlyBraceTypes.includes(type)) {
-    return `{${input}}`;
   }
 };
 
@@ -61,5 +56,5 @@ var stringifyJSON = function(obj) {
   if (rejectTypes.includes(type)) {
     return;
   }
-  return decorator(type, obj);
+  return decoratePrimitive(type, obj);
 };
