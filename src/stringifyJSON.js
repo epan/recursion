@@ -43,18 +43,31 @@ var bracketTypes = ['array'];
 var curlyBraceTypes = ['object'];
 var objects = ['array', 'object'];
 
-var decoratePrimitives = function(type, input) {
-  if (plainTypes.includes(type)) {
+var decoratePrimitives = function(input) {
+  if (plainTypes.includes(classifyType(input))) {
     return `${input}`;
   }
-  if (quoteTypes.includes(type)) {
+  if (quoteTypes.includes(classifyType(input))) {
     return `"${input}"`;
   }
 };
 
 // 3. Format/decorate array
 
+// 4. Format/decorate object
 
+var stringifyObject = function(obj) {
+  var resultObj = '{';
+  var pairs = [];
+  for (var key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      var pair = `"${key}":${decoratePrimitives(obj[key])}`;
+      pairs.push(pair);
+    }
+  }
+  resultObj += pairs.join(',') + '}';
+  return resultObj;
+};
 
 // ORIGINAL FUNCTION
 

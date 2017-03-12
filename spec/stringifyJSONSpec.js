@@ -10,14 +10,14 @@ describe('custom unit stingifyJSON tests', function() {
   it('should stringify flat arrays', function() {
     flatArrays.forEach(function(test) {
       var expected = JSON.stringify(test);
-      var actual = stringifyJSON(test);
+      var actual = stringifyArray(test);
       expect(actual).to.equal(expected);
     });
   });
   it('should stringify flat objects', function() {
     flatObjects.forEach(function(test) {
       var expected = JSON.stringify(test);
-      var actual = stringifyJSON(test);
+      var actual = stringifyObject(test);
       expect(actual).to.equal(expected);
     });
   });
