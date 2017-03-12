@@ -50,9 +50,6 @@ var decoratePrimitives = function(input) {
   if (quoteTypes.includes(type)) {
     return `"${input}"`;
   }
-  if (rejectTypes.includes(type)) {
-    return;
-  }
 };
 
 // 3. Format/decorate array
