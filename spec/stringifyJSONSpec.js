@@ -31,7 +31,7 @@ describe('custom unit stingifyJSON tests', function() {
   it('should stringify arrays with nested arrays', function() {
     arraysWithinArrays.forEach(function(test) {
       var expected = JSON.stringify(test);
-      var actual = stringifyJSON(test);
+      var actual = stringifyArray(test);
       expect(actual).to.equal(expected);
     });
   });
