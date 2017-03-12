@@ -82,7 +82,10 @@ var stringifyJSON = function(obj) {
   if (rejectTypes.includes(type)) {
     return;
   }
-  if (classifyType(obj) !== 'object') {
+  if (type !== 'object') {
     return decoratePrimitives(obj);
+  }
+  if (type === 'object') {
+    return stringifyObject(obj);
   }
 };

@@ -17,14 +17,14 @@ describe('custom unit stingifyJSON tests', function() {
   it('should stringify flat objects', function() {
     flatObjects.forEach(function(test) {
       var expected = JSON.stringify(test);
-      var actual = stringifyObject(test);
+      var actual = stringifyJSON(test);
       expect(actual).to.equal(expected);
     });
   });
   it('should stringify objects with nested objects', function() {
     objectsWithinObjects.forEach(function(test) {
       var expected = JSON.stringify(test);
-      var actual = stringifyObject(test);
+      var actual = stringifyJSON(test);
       expect(actual).to.equal(expected);
     });
   });
