@@ -66,6 +66,9 @@ function stringifyArray(arr) {
     if (type === 'array') {
       value += stringifyArray(element);
     }
+    if (type === 'object') {
+      value += stringifyObject(element);
+    }
     if (!objects.includes(type)) {
       value += decoratePrimitives(element);
     }
@@ -84,6 +87,9 @@ function stringifyObject(obj) {
       var pair = `"${key}":`;
       if (type === 'object') {
         pair += `${stringifyObject(obj[key])}`;
+      }
+      if (type === 'array') {
+        pair += `${stringifyArray(obj[key])}`;
       }
       if (!objects.includes(type)) {
         pair += `${decoratePrimitives(obj[key])}`;
