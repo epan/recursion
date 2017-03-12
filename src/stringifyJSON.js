@@ -53,6 +53,15 @@ var decoratePrimitives = function(input) {
 };
 
 // 3. Format/decorate array
+function stringifyArray(arr) {
+  var values = [];
+  arr.forEach(function(element) {
+    if (classifyType(element) !== 'object') {
+      values.push(decoratePrimitives(element));
+    }
+  });
+  return '[' + values.join(',') + ']';
+}
 
 // 4. Format/decorate object
 
