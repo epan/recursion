@@ -41,7 +41,8 @@ var plainTypes = ['boolean', 'number', 'null'];
 var quoteTypes = ['string'];
 var bracketTypes = ['array'];
 var curlyBraceTypes = ['object'];
-var objects = ['array', 'object'];
+var objectTypes = [].concat(bracketTypes, curlyBraceTypes);
+var primitiveTypes = [].concat(plainTypes, quoteTypes);
 
 var decoratePrimitives = function(input) {
   var type = classifyType(input);
@@ -69,10 +70,12 @@ function stringifyArray(arr) {
     if (type === 'object') {
       value += stringifyObject(element);
     }
-    if (!objects.includes(type)) {
+    if (primitiveTypes.includes(type)) {
       value += decoratePrimitives(element);
     }
-    values.push(value);
+    if (!rejectTypes.includes(type)) {
+      values.push(value);
+    }
   });
   return '[' + values.join(',') + ']';
 }
@@ -84,17 +87,19 @@ function stringifyObject(obj) {
   for (var key in obj) {
     if (obj.hasOwnProperty(key)) {
       var type = classifyType(obj[key]);
-      var pair = `"${key}":`;
+      var pair = '';
       if (type === 'object') {
-        pair += `${stringifyObject(obj[key])}`;
+        pair += `"${key}":${stringifyObject(obj[key])}`;
       }
       if (type === 'array') {
-        pair += `${stringifyArray(obj[key])}`;
+        pair += `"${key}":${stringifyArray(obj[key])}`;
       }
-      if (!objects.includes(type)) {
-        pair += `${decoratePrimitives(obj[key])}`;
+      if (primitiveTypes.includes(type)) {
+        pair += `"${key}":${decoratePrimitives(obj[key])}`;
       }
-      pairs.push(pair);
+      if (!rejectTypes.includes(type)) {
+        pairs.push(pair);
+      }
     }
   }
   return '{' + pairs.join(',') + '}';
@@ -107,7 +112,7 @@ var stringifyJSON = function(obj) {
   if (rejectTypes.includes(type)) {
     return;
   }
-  if (!objects.includes(type)) {
+  if (primitiveTypes.includes(type)) {
     return decoratePrimitives(obj);
   }
   if (type === 'object') {
@@ -116,5 +121,4 @@ var stringifyJSON = function(obj) {
   if (type === 'array') {
     return stringifyArray(obj);
   }
-
 };
