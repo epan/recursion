@@ -44,21 +44,32 @@ var curlyBraceTypes = ['object'];
 var objects = ['array', 'object'];
 
 var decoratePrimitives = function(input) {
-  if (plainTypes.includes(classifyType(input))) {
+  var type = classifyType(input);
+  if (plainTypes.includes(type)) {
     return `${input}`;
   }
-  if (quoteTypes.includes(classifyType(input))) {
+  if (quoteTypes.includes(type)) {
     return `"${input}"`;
+  }
+  if (rejectTypes.includes(type)) {
+    return;
   }
 };
 
 // 3. Format/decorate array
+
 function stringifyArray(arr) {
   var values = [];
   arr.forEach(function(element) {
-    if (classifyType(element) !== 'object') {
-      values.push(decoratePrimitives(element));
+    var value = '';
+    var type = classifyType(element);
+    if (type === 'array') {
+      value += stringifyArray(element);
     }
+    if (!objects.includes(type)) {
+      value += decoratePrimitives(element);
+    }
+    values.push(value);
   });
   return '[' + values.join(',') + ']';
 }
@@ -69,11 +80,12 @@ function stringifyObject(obj) {
   var pairs = [];
   for (var key in obj) {
     if (obj.hasOwnProperty(key)) {
+      var type = classifyType(obj[key]);
       var pair = `"${key}":`;
-      if (classifyType(obj[key]) === 'object') {
+      if (type === 'object') {
         pair += `${stringifyObject(obj[key])}`;
       }
-      if (!objects.includes(classifyType(obj[key]))) {
+      if (!objects.includes(type)) {
         pair += `${decoratePrimitives(obj[key])}`;
       }
       pairs.push(pair);
@@ -89,10 +101,14 @@ var stringifyJSON = function(obj) {
   if (rejectTypes.includes(type)) {
     return;
   }
-  if (type !== 'object') {
+  if (!objects.includes(type)) {
     return decoratePrimitives(obj);
   }
   if (type === 'object') {
     return stringifyObject(obj);
   }
+  if (type === 'array') {
+    return stringifyArray(obj);
+  }
+
 };

@@ -24,14 +24,14 @@ describe('custom unit stingifyJSON tests', function() {
   it('should stringify flat arrays', function() {
     flatArrays.forEach(function(test) {
       var expected = JSON.stringify(test);
-      var actual = stringifyArray(test);
+      var actual = stringifyJSON(test);
       expect(actual).to.equal(expected);
     });
   });
   it('should stringify arrays with nested arrays', function() {
     arraysWithinArrays.forEach(function(test) {
       var expected = JSON.stringify(test);
-      var actual = stringifyArray(test);
+      var actual = stringifyJSON(test);
       expect(actual).to.equal(expected);
     });
   });
