@@ -28,7 +28,8 @@ var arraysWithinArrays = [
 ];
 
 var objectsWithinObjects = [
-  {'a': {'b': 'c'}}
+  {'a': {'b': 'c'}},
+  {'a': {'b': {'c': 'd'}}, 'sidekick': false}
 ];
 
 var arraysWithinObjects = [

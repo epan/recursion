@@ -61,7 +61,13 @@ var stringifyObject = function(obj) {
   var pairs = [];
   for (var key in obj) {
     if (obj.hasOwnProperty(key)) {
-      var pair = `"${key}":${decoratePrimitives(obj[key])}`;
+      var pair = `"${key}":`;
+      if (classifyType(obj[key]) === 'object') {
+        pair += `${stringifyObject(obj[key])}`;
+      }
+      if (!objects.includes(classifyType(obj[key]))) {
+        pair += `${decoratePrimitives(obj[key])}`;
+      }
       pairs.push(pair);
     }
   }
