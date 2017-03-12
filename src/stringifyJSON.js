@@ -8,8 +8,6 @@
 // 2. Based on data type, format/decorate primitive string version
 // 3. Format/decorate array
 // 4. Format/decorate object
-// 5. Traverse (across and into) entire JSON input
-// 6. Build up string as traversing and then return it
 
 
 // 1. Be able to detect what data type each node is
