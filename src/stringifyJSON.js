@@ -56,8 +56,7 @@ var decoratePrimitives = function(input) {
 
 // 4. Format/decorate object
 
-var stringifyObject = function(obj) {
-  var resultObj = '{';
+function stringifyObject(obj) {
   var pairs = [];
   for (var key in obj) {
     if (obj.hasOwnProperty(key)) {
@@ -71,9 +70,8 @@ var stringifyObject = function(obj) {
       pairs.push(pair);
     }
   }
-  resultObj += pairs.join(',') + '}';
-  return resultObj;
-};
+  return '{' + pairs.join(',') + '}';
+}
 
 // ORIGINAL FUNCTION
 
