@@ -1,5 +1,5 @@
 // custom test cases
-describe('custom unit stingifyJSON tests', function() {
+describe('custom stingifyJSON unit tests', function() {
   it('should stringify plain primitives', function() {
     primitives.forEach(function(test) {
       var expected = JSON.stringify(test);
